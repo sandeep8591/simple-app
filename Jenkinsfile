@@ -29,7 +29,7 @@ pipeline {
                       nexusUrl: '192.168.1.164:8081',
                       nexusVersion: 'nexus3',
                       protocol: 'http',
-                      repository: 'http://192.168.1.164:8081/repository/repository-example/',
+                      repository: 'repository-example',
                       version: '3.0.0-SNAPSHOT'
                     }
             }
