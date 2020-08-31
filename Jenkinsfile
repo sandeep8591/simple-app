@@ -23,7 +23,7 @@ pipeline {
                         [
                             artifactId: 'simple-app', 
                             classifier: '', 
-                            file: "target/simple-app-${mavenPom.version}.war", 
+                            file: "target/*.war", 
                             type: 'war'
                         ]
                     ], 
