@@ -1,4 +1,4 @@
-def gitBranch = env.BRANCH_NAME
+def gitBranch = env.GIT_BRANCH
 sh """ 
 echo $gitBranch
 """
