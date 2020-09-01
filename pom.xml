@@ -4,8 +4,8 @@
 	<groupId>in.javahome</groupId>
 	<artifactId>simple-app</artifactId>
 	<packaging>war</packaging>
-	<version>3.0.0-${env.BUILD_NUMBER}</version>
-	<name>simple-app-${BRANCH_NAME}</name>
+	<version>3.0.0-${BUILD_NUMBER}</version>
+	<name>simple-app-${env.BRANCH_NAME}</name>
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
