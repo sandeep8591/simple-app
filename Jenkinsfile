@@ -1,4 +1,7 @@
 def gitBranch = env.BRANCH_NAME
+sh """ 
+echo $gitBranch
+"""
 pipeline {
     agent any
     tools {
@@ -12,6 +15,8 @@ pipeline {
         stage('Build'){
             steps{
                  sh """
+                 sed -i 's/branchname/${gitBranch}/g' pom.xml
+>>>>>>> c6330978437b4f30981ad2818a5a2c7d5c38550c
                  mvn clean package
                  mvn sonar:sonar
                  """
