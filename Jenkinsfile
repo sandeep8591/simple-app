@@ -12,7 +12,7 @@ pipeline {
         stage('Build'){
             steps{
                  sh """
-                 sed "s/branchname/${env.GIT_BRANCH}/g" pom.xml
+                 sed -i 's/branchname/\${env.GIT_BRANCH}/g' pom.xml
                  mvn clean package
                  mvn sonar:sonar
                  """
