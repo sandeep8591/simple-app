@@ -12,7 +12,6 @@ pipeline {
         stage('Build'){
             steps{
                  sh """
-                 sed -e 's/branchname/${gitBranch}/g' pom.xml
                  mvn clean package
                  mvn sonar:sonar
                  """
