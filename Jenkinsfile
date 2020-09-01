@@ -7,11 +7,14 @@ pipeline {
     options {
         buildDiscarder logRotator(daysToKeepStr: '5', numToKeepStr: '7')
     }
+    def gitBranch = env.BRANCH_NAME
     stages{
         stage('Build'){
             steps{
-                 sh script: 'mvn clean package'
-                 sh script: 'mvn sonar:sonar'
+                 sh """
+                 mvn clean package
+                 mvn sonar:sonar
+                 """
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
@@ -22,7 +25,7 @@ pipeline {
                       nexusArtifactUploader artifacts: [
                             [artifactId: 'simple-app',
                              classifier: '',
-                             file: "target/simple-app-${mavenPom.version}.war",
+                             file: "target/${mavenPom.name}-${mavenPom.version}.war",
                              type: 'war'
                               ]
                             ],
