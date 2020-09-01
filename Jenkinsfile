@@ -1,4 +1,7 @@
 def gitBranch = env.BRANCH_NAME
+sh """ 
+echo $gitBranch
+"""
 pipeline {
     agent any
     tools {
