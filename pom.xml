@@ -5,7 +5,7 @@
 	<artifactId>simple-app</artifactId>
 	<packaging>war</packaging>
 	<version>3.0.0-${BUILD_NUMBER}</version>
-	<name>simple-app-${gitBranch}</name>
+	<name>simple-app-${BRANCH_NAME}</name>
 	<url>http://maven.apache.org</url>
 	
 	<dependencies>
