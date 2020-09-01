@@ -25,7 +25,7 @@ pipeline {
                       nexusArtifactUploader artifacts: [
                             [artifactId: 'simple-app',
                              classifier: '',
-                             file: "target/simple-app--${mavenPom.version}.war",
+                             file: "target/simple-app-${mavenPom.version}.war",
                              type: 'war'
                               ]
                             ],
