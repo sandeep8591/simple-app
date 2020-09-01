@@ -12,7 +12,6 @@ pipeline {
         stage('Build'){
             steps{
                  sh """
-                 sed -i 's|branchname|'${gitBranch}'|g' pom.xml
                  mvn clean package
                  mvn sonar:sonar
                  """
@@ -26,7 +25,7 @@ pipeline {
                       nexusArtifactUploader artifacts: [
                             [artifactId: 'simple-app',
                              classifier: '',
-                             file: "target/simple-app-${gitBranch}-${mavenPom.version}.war",
+                             file: "target/simple-app--${mavenPom.version}.war",
                              type: 'war'
                               ]
                             ],
