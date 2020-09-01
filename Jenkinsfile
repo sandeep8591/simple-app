@@ -1,3 +1,4 @@
+def gitBranch = env.BRANCH_NAME
 pipeline {
     agent any
     tools {
@@ -7,7 +8,6 @@ pipeline {
     options {
         buildDiscarder logRotator(daysToKeepStr: '5', numToKeepStr: '7')
     }
-    def gitBranch = env.BRANCH_NAME
     stages{
         stage('Build'){
             steps{
