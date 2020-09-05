@@ -39,5 +39,9 @@ pipeline {
                     }
             }
         }
+        stage('Deploy war file into tomcat server')
+        steps {
+            sh 'cp target/*.war /usr/share/tomcat/webapps/'
+            sh 'systemctl restart tomcat'
    }
 }
