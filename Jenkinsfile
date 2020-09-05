@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Build dockerimage') {
             steps {
-                sh 'docker build -t vennamsandeep/testjava:${BUILD_NUMBER}'
+                sh 'docker build -it vennamsandeep/testjava:${BUILD_NUMBER} .'
                 sh 'docker run -itd -p 80:8080 vennamsandeep/testjava:${BUILD_NUMBER}'
             }
         }
