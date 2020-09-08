@@ -60,7 +60,7 @@ pipeline {
         }
        stage('Run container ') {
         steps {
-            sh "docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}"
+            sh 'docker run -itd -p 80:8080 vennamsandeep/testjava:${BUILD_NUMBER}'
             }    
        }
    }
