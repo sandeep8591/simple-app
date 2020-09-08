@@ -51,12 +51,10 @@ pipeline {
         }
         stage('Deploy our image') { 
             steps { 
-                script { 
                     docker.withRegistry( '', registryCredential ) { 
                         docker.push() 
                     }
-                } 
-            }
+                }
         }
        stage('Run container ') {
         steps {
