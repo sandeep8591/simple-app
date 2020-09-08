@@ -46,15 +46,17 @@ pipeline {
         }
         stage('Docker build') {
            steps {
-           dockerImage = docker.build registry + "{:$BUILD_NUMBER}"
-           }
+           sh 'docker build -t vennamsandeep/testjava:${BUILD_NUMBER}' 
+          }
         }
-        stage('Push image to dokerhub') {
-           steps {
-           docker.withRegistry( '', registryCredential ) {
-               dockerImage.push() 
-               } 
-           }
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', registryCredential ) { 
+                        dockerImage.push() 
+                    }
+                } 
+            }
         }
        stage('Run container ') {
         steps {
