@@ -24,8 +24,8 @@ pipeline {
             }
         }
         stage('Upload War To Nexus'){
-            steps{
-                script{
+            steps {
+                script {
                       def mavenPom = readMavenPom file: 'pom.xml'
                       nexusArtifactUploader artifacts: [
                             [artifactId: 'simple-app',
@@ -51,11 +51,11 @@ pipeline {
         }
         stage('Deploy our image') { 
             steps { 
-                script { 
+                script {
                     docker.withRegistry( '', registryCredential ) { 
-                        docker.push() 
+                    sh 'docker push vennamsandeep/testjava:${BUILD_NUMBER}'
                     }
-                } 
+                }
             }
         }
        stage('Run container ') {
