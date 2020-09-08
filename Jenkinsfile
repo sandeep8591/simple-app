@@ -46,19 +46,19 @@ pipeline {
         }
         stage('Docker build') {
            steps {
-           dockerImage = docker.build registry + ":$BUILD_NUMBER"
+           dockerImage = docker.build registry + "{:$BUILD_NUMBER}"
            }
         }
         stage('Push image to dokerhub') {
            steps {
-           docker.withRegistry('', registryCredential ) {
+           docker.withRegistry( '', registryCredential ) {
                dockerImage.push() 
                } 
            }
         }
        stage('Run container ') {
         steps {
-            sh 'docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}'
+            sh "docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}"
             }    
        }
    }
