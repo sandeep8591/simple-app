@@ -54,13 +54,8 @@ pipeline {
                dockerImage.push() 
                } 
            }
-        stage('Build dockerimage') {
-            steps {
-                sh 'docker build -it vennamsandeep/testjava:${BUILD_NUMBER} .'
-                sh 'docker run -itd -p 80:8080 vennamsandeep/testjava:${BUILD_NUMBER}'
-            }
         }
-       stage('Run container ')
+       stage('Run container ') {
         steps {
             sh 'docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}'
             }    
