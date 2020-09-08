@@ -1,5 +1,6 @@
 def gitBranch = env.GIT_BRANCH
 pipeline {
+    environment {
         registry = "vennamsandeep/testjava" 
         registryCredential = 'dockerhub_id' 
         dockerImage = '' 
