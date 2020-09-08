@@ -63,5 +63,7 @@ pipeline {
        stage('Run container ')
         steps {
             sh 'docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}'
+            }    
+       }
    }
 }
