@@ -1,5 +1,9 @@
 def gitBranch = env.GIT_BRANCH
 pipeline {
+        registry = "vennamsandeep/testjava" 
+        registryCredential = 'dockerhub_id' 
+        dockerImage = '' 
+    }
     agent any
     tools {
         maven 'maven'
@@ -39,11 +43,20 @@ pipeline {
                     }
             }
         }
-        stage('Deploy war file into tomcat server') {
+        stage('Docker build') {
            steps {
-            sh 'cp target/*.war /usr/share/tomcat/webapps/'
-            sh 'systemctl restart tomcat'
+           dockerImage = docker.build registry + ":$BUILD_NUMBER"
            }
         }
+        stage('Push image to dokerhub') {
+           steps {
+           docker.withRegistry('', registryCredential ) {
+               dockerImage.push() 
+               } 
+           }
+        }
+       stage('Run container ')
+        steps {
+            sh 'docker run -itd -p 80:8080 registry + {:$BUILD_NUMBER}'
    }
 }
