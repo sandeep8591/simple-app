@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Docker build') {
            steps {
-           sh 'docker build -t vennamsandeep/testjava:${BUILD_NUMBER}' 
+           sh 'docker build -t vennamsandeep/testjava:${BUILD_NUMBER} .' 
           }
         }
         stage('Deploy our image') { 
