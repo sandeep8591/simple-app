@@ -23,24 +23,35 @@ pipeline {
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
-        stage('Upload War To Nexus'){
+#        stage('Upload War To Nexus'){
+#            steps {
+#                script {
+#                      def mavenPom = readMavenPom file: 'pom.xml'
+#                      nexusArtifactUploader artifacts: [
+#                            [artifactId: 'simple-app',
+#                             classifier: '',
+#                             file: "target/simple-app-${mavenPom.version}.war",
+#                             type: 'war'
+#                              ]
+#                            ],
+#                      credentialsId: 'nexus-cred',
+#                      groupId: 'in.javahome',
+#                      nexusUrl: '192.168.0.164:8081',
+#                      nexusVersion: 'nexus3',
+#                      protocol: 'http',
+#                      repository: 'repository-example',
+#                      version: "${mavenPom.version}"
+#                    }
+#            }
+#        }
+        {
+         stage('Jfrog Artifactory')
             steps {
                 script {
-                      def mavenPom = readMavenPom file: 'pom.xml'
-                      nexusArtifactUploader artifacts: [
-                            [artifactId: 'simple-app',
-                             classifier: '',
-                             file: "target/simple-app-${mavenPom.version}.war",
-                             type: 'war'
-                              ]
-                            ],
-                      credentialsId: 'nexus-cred',
-                      groupId: 'in.javahome',
-                      nexusUrl: '192.168.0.164:8081',
-                      nexusVersion: 'nexus3',
-                      protocol: 'http',
-                      repository: 'repository-example',
-                      version: "${mavenPom.version}"
+                      def server = Artifactory.server 'artifactory'
+                      def rtMaven = Artifactory.newMavenBuild()
+                      rtMaven.deployer server: server, releaseRepo: 'jfrog-local', snapshotRepo: 'jfrog-local'
+                      def buildInfo = rtMaven.run pom: 'simple-app/pom.xml', goals: 'clean install'
                     }
             }
         }
