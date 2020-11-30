@@ -23,27 +23,6 @@ pipeline {
                  archiveArtifacts artifacts: 'target/*.war', onlyIfSuccessful: true
             }
         }
-#        stage('Upload War To Nexus'){
-#            steps {
-#                script {
-#                      def mavenPom = readMavenPom file: 'pom.xml'
-#                      nexusArtifactUploader artifacts: [
-#                            [artifactId: 'simple-app',
-#                             classifier: '',
-#                             file: "target/simple-app-${mavenPom.version}.war",
-#                             type: 'war'
-#                              ]
-#                            ],
-#                      credentialsId: 'nexus-cred',
-#                      groupId: 'in.javahome',
-#                      nexusUrl: '192.168.0.164:8081',
-#                      nexusVersion: 'nexus3',
-#                      protocol: 'http',
-#                      repository: 'repository-example',
-#                      version: "${mavenPom.version}"
-#                    }
-#            }
-#        }
         {
          stage('Jfrog Artifactory')
             steps {
