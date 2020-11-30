@@ -30,7 +30,7 @@ pipeline {
                       def server = Artifactory.server 'artifactory'
                       def rtMaven = Artifactory.newMavenBuild()
                       rtMaven.deployer server: server, releaseRepo: 'jfrog-local', snapshotRepo: 'jfrog-local'
-                      def buildInfo = rtMaven.run pom: 'simple-app/pom.xml', goals: 'clean install'
+                      def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
                     }
             }
         }
