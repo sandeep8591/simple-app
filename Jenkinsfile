@@ -39,7 +39,7 @@ pipeline {
            sh 'docker build -t vennamsandeep/testjava:${BUILD_NUMBER} .' 
           }
         }
-        stage('Deploy our image') { 
+        stage('Docker registry') { 
             steps { 
                 script {
                     docker.withRegistry( '', registryCredential ) { 
